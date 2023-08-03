@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<odoo><data>
+
+    <menuitem id="menu_university_root"
+        name="University"
+        sequence="0"/>
+
+    <menuitem id="menu_student_master"
+    name="Student Details"
+    parent ="menu_university_root"
+    sequence="0"/>
+
+
+</data></odoo>
