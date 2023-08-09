@@ -1,4 +1,4 @@
-from odoo import api,fields, models
+from odoo import api, fields, models
 
 class Student(models.Model):
     _name = "university.student"

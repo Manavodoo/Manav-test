@@ -6,13 +6,16 @@
     'author' : 'Manav',
     'summary': 'University management system',
     'version': '1.0',
-    'depends': [],
+    'depends': ['base','website','portal'],
     'data': [
         'views/menu.xml',
-        'views/student.xml'
+        'views/student.xml',
+        'views/students_portal.xml',
+        'security/security.xml',
         # 'security/ir.model.access.csv',
         # 'views/firstfile.xml',
     ],
+    'website': 'university_system',
     'sequence' : -50,
     'installable': True,
     'application' : True,

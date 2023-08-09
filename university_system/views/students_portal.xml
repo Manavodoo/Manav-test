@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <template id="portal_my_home" inherit_id="portal.portal_my_home" name="Students Portal Menu">
+            <xpath expr ="//div[hasclass('o_portal_docs')]" position="inside">
+                <t t-call="portal.portal_docs_entry">
+                    <t t-set="url">/my/students</t>
+                    <t t-set="title">View Students</t>
+                    <t t-set="placeholder_count" t-value="'student_counts'" />
+                </t>
+            </xpath>
+        </template>
+
+        <template id="portal_breadcrumbs" inherit_id="portal.portal_breadcrumbs">
+            <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+                <li t-if="page_name =='students_list_view'" class="breadcrumb-item">Students</li>
+            </xpath>
+        </template>
+
+        <template id="student_list_view" name="Student">
+            <t t-call="portal.portal_layout">
+                <t t-call="portal.portal_table">
+                    <thead>
+                        <tr>
+                            <th class="text-center" >Name </th>
+                            <th class="text-center" >Age</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="students" t-as="student">
+                                <tr>
+                                    <td class="text-center">
+                                        <a t-att-href="'/my/update_student/' + str(student.id)">
+                                            <t t-out="student.name"/>
+                                        </a>
+                                    </td>
+                                    <td class="text-center">
+                                        <t t-out="student.age"/>
+                                    </td>
+                                </tr>
+                        </t>
+                    </tbody>
+                </t>
+            </t>
+            
+        </template>
+
+        <template id="custom_student_form_view" name="Update Student Form">
+            <t t-call="portal.portal_layout">
+                <form action="/my/do_update_student" method="post">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <input type="hidden" name="student_id" t-att-value="student.id"/>
+                    <group>
+                        <label for="name">Name:</label>
+                        <input type="text" name="name" id="name" t-att-value="student.name" />
+                        <br/>
+                        <label for="age">Age:</label>
+                        <input type="text" name="age" id="age" t-att-value="student.age" />
+                    </group>
+                    <footer>
+                        <button type="submit" class="btn-primary">Update</button>
+                    </footer>
+                </form>
+            </t>
+        </template>
+
+        <template id="detail" name="University Student">
+            <t t-call="website.layout">
+                <div class="container">
+                    <h1>University Students</h1>
+                    <!-- <p t-esc="student_data"/> -->
+                    <ul>
+                        <t t-foreach="student_data" t-as="student">
+                            <li>
+                                <span t-esc="student.name"/> - <span t-esc="student.age"/>
+                            </li>
+                        </t>
+                    </ul>
+                </div>
+            </t>
+        </template>
+
+
+
+    </data>
+
+
+        <!-- <script type="text/javascript">
+            $(document).ready(function() {
+                $(".clickable-row").click(function() {
+                    window.location = $(this).data("href");
+                });
+            });
+        </script> -->
+</odoo>

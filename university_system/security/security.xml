@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="module_category_university" model="ir.module.category">
+        <field name="name">University Management</field>
+        <field name="description">Category for university</field>
+    </record>
+
+
+    <record id="group_university_prof" model="res.groups">
+        <field name="name">Professor</field>
+        <field name="category_id" ref="module_category_university"></field>
+    </record> 
+
+    <record id="group_university_manager" model="res.groups">
+        <field name="name">Manager</field>
+        <field name="category_id" ref="module_category_university"></field>
+        <field name="implied_ids" eval="[(4,ref('group_university_prof'))]"></field>
+    </record> 
+</odoo>
